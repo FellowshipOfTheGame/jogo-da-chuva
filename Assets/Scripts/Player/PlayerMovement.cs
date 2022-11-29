@@ -27,10 +27,12 @@ public class PlayerMovement : MonoBehaviour
 
         playerVelocity.x = direction * maxWalkSpeed;
 
-        if (direction < 0)
-            gameObject.transform.localScale = new Vector3(-10, 10, 1);
-        if (direction > 0)
-            gameObject.transform.localScale = new Vector3(10, 10, 1);
+        Debug.Log(direction);
+        Debug.Log(_isFlipped);
+        if (direction < 0 && !_isFlipped)
+            FlipPlayer();
+        if (direction > 0 && _isFlipped)
+            FlipPlayer();
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -43,6 +45,15 @@ public class PlayerMovement : MonoBehaviour
         }
 
         GetComponent<Rigidbody2D>().velocity = playerVelocity;
+    }
+
+
+    void FlipPlayer()
+    {
+        Vector3 currentScale = gameObject.transform.localScale;
+        currentScale.x *= -1;
+        gameObject.transform.localScale = currentScale;
+        _isFlipped = !_isFlipped;
     }
 
 }
