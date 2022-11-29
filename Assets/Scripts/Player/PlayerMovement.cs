@@ -62,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            isCrouching = false;
             isHitingGround = false;
             isOnAirJumping = true;
             playerVelocity.y = jumpSpeed;
@@ -76,17 +77,12 @@ public class PlayerMovement : MonoBehaviour
         UpdateAnimator();
     }
 
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        isHitingGround = true;
-        isOnAirJumping = false;
-    }
-
     void UpdateAnimator()
     {
         anim.SetBool("isWalking", isWalking);
         anim.SetBool("isOnAirJumping", isOnAirJumping);
         anim.SetBool("isHitingGround", isHitingGround);
+        anim.SetBool("isCrouching", isCrouching);
     }
 
     void FlipPlayer()
