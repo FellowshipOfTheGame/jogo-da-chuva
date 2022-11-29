@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private Animator anim;
+
+    private const float MIN_DISTANCE = 0.001f;
+
     public float maxWalkSpeed;
     public float jumpSpeed;
 
@@ -27,8 +31,12 @@ public class PlayerMovement : MonoBehaviour
 
         playerVelocity.x = direction * maxWalkSpeed;
 
-        Debug.Log(direction);
-        Debug.Log(_isFlipped);
+        if (Mathf.Abs(direction) > MIN_DISTANCE && !isJumping && !isCrouching)
+            isWalking = true;
+        else
+            isWalking = false;        
+        anim.SetBool("isWalking", isWalking);
+
         if (direction < 0 && !_isFlipped)
             FlipPlayer();
         if (direction > 0 && _isFlipped)
