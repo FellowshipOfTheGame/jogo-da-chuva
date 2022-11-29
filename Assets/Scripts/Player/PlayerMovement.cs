@@ -10,8 +10,11 @@ public class PlayerMovement : MonoBehaviour
 
     private const float MIN_DISTANCE = 0.001f;
 
-    public float maxWalkSpeed;
-    public float jumpSpeed;
+    [SerializeField] private float maxWalkSpeed;
+    [SerializeField] private float maxCrouchSpeed;
+    [SerializeField] private float jumpSpeed;
+
+    private float _maxSpeed;
 
     public bool isWalking = false;
     public bool isOnAirJumping = false;
@@ -34,21 +37,26 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         playerVelocity = Vector3.zero;
+        _maxSpeed = maxWalkSpeed;
     }
 
     void Update()
     {
         float direction = Input.GetAxis("Horizontal");
 
-        playerVelocity.x = direction * maxWalkSpeed;
+        playerVelocity.x = direction * _maxSpeed;
 
         if (Mathf.Abs(direction) > MIN_DISTANCE && !isOnAirJumping && !isCrouching && isHitingGround)
+        {
+            _maxSpeed = maxWalkSpeed;
             isWalking = true;
+        }
         else
             isWalking = false;
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKey(KeyCode.LeftShift)) && !isOnAirJumping)
         {
+            _maxSpeed = maxCrouchSpeed;
             isCrouching = true;
         } else if (Input.GetKeyUp(KeyCode.LeftShift))
         {

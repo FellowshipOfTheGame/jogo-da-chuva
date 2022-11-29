@@ -466,6 +466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 697914799}
   maxWalkSpeed: 10
+  maxCrouchSpeed: 5
   jumpSpeed: 7
   isWalking: 0
   isOnAirJumping: 0
@@ -738,6 +739,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   maxWalkSpeed: 10
+  maxCrouchSpeed: 0
   jumpSpeed: 10
   isWalking: 0
   isOnAirJumping: 0
