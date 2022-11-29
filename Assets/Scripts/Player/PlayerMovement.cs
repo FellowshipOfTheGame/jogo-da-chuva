@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance;
+
     [SerializeField] private Animator anim;
 
     private const float MIN_DISTANCE = 0.001f;
@@ -12,13 +14,22 @@ public class PlayerMovement : MonoBehaviour
     public float jumpSpeed;
 
     public bool isWalking = false;
-    public bool isJumping = false;
+    public bool isOnAirJumping = false;
+    public bool isHitingGround = true;
     public bool isRunning = false;
     public bool isCrouching = false;
 
     private bool _isFlipped = false;
 
     Vector3 playerVelocity;
+
+    void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(this);
+    }
 
     void Start()
     {
@@ -31,11 +42,18 @@ public class PlayerMovement : MonoBehaviour
 
         playerVelocity.x = direction * maxWalkSpeed;
 
-        if (Mathf.Abs(direction) > MIN_DISTANCE && !isJumping && !isCrouching)
+        if (Mathf.Abs(direction) > MIN_DISTANCE && !isOnAirJumping && !isCrouching && isHitingGround)
             isWalking = true;
         else
-            isWalking = false;        
-        anim.SetBool("isWalking", isWalking);
+            isWalking = false;
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            isCrouching = true;
+        } else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            isCrouching = false;
+        }
 
         if (direction < 0 && !_isFlipped)
             FlipPlayer();
@@ -44,7 +62,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            isJumping = true;
+            isHitingGround = false;
+            isOnAirJumping = true;
             playerVelocity.y = jumpSpeed;
         }
         else
@@ -53,8 +72,22 @@ public class PlayerMovement : MonoBehaviour
         }
 
         GetComponent<Rigidbody2D>().velocity = playerVelocity;
+
+        UpdateAnimator();
     }
 
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        isHitingGround = true;
+        isOnAirJumping = false;
+    }
+
+    void UpdateAnimator()
+    {
+        anim.SetBool("isWalking", isWalking);
+        anim.SetBool("isOnAirJumping", isOnAirJumping);
+        anim.SetBool("isHitingGround", isHitingGround);
+    }
 
     void FlipPlayer()
     {

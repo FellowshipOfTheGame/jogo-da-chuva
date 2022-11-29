@@ -408,7 +408,7 @@ Transform:
   m_GameObject: {fileID: 1677507572}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.3857374, y: 0.5815154, z: 0.030006353}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 697914797}
@@ -466,7 +466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 697914799}
   maxWalkSpeed: 10
-  jumpSpeed: 10
+  jumpSpeed: 7
   isWalking: 0
   isJumping: 0
   isRunning: 0
