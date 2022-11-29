@@ -7,6 +7,13 @@ public class PlayerMovement : MonoBehaviour
     public float maxWalkSpeed;
     public float jumpSpeed;
 
+    public bool isWalking = false;
+    public bool isJumping = false;
+    public bool isRunning = false;
+    public bool isCrouching = false;
+
+    private bool _isFlipped = false;
+
     Vector3 playerVelocity;
 
     void Start()
@@ -16,10 +23,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        playerVelocity.x = Input.GetAxis("Horizontal") * maxWalkSpeed;
+        float direction = Input.GetAxis("Horizontal");
+
+        playerVelocity.x = direction * maxWalkSpeed;
+
+        if (direction < 0)
+            gameObject.transform.localScale = new Vector3(-10, 10, 1);
+        if (direction > 0)
+            gameObject.transform.localScale = new Vector3(10, 10, 1);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            isJumping = true;
             playerVelocity.y = jumpSpeed;
         }
         else
