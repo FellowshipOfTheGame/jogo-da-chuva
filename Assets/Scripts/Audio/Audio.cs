@@ -16,27 +16,24 @@ public class Audio : MonoBehaviour
     [SerializeField] private Sound[] _musics;
 
     // Awake is called before the Start method
-    void Awake()
+    protected virtual void Awake()
     {
-        foreach (Sound s in _SFXs)
-        {
-            SetSoundSettings(s, _SFX_output);
-        }
-        foreach (Sound s in _musics)
-        {
-            SetSoundSettings(s, _Music_output);
-        }
+        SetSoundSettings(_SFXs, _SFX_output);
+        SetSoundSettings(_musics, _Music_output);        
     }
 
-    private void SetSoundSettings(Sound s, AudioMixerGroup output)
+    private void SetSoundSettings(Sound[] sounds, AudioMixerGroup output)
     {
-        s.source = gameObject.AddComponent<AudioSource>();
-        s.source.outputAudioMixerGroup = output;
-        s.source.clip = s.clip;
-        s.source.loop = s.loop;
-        s.source.volume = s.volume;
-        s.source.pitch = s.pitch;
-        s.source.spatialBlend = s.spatialBlend;
+        foreach (Sound s in sounds)
+        {
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.outputAudioMixerGroup = output;
+            s.source.clip = s.clip;
+            s.source.loop = s.loop;
+            s.source.volume = s.volume;
+            s.source.pitch = s.pitch;
+            s.source.spatialBlend = s.spatialBlend;
+        }
     }
 
     public void PlaySFX (string name)
@@ -101,7 +98,6 @@ public class Audio : MonoBehaviour
             Debug.LogWarning("Sound:" + name + " not found to PLAY!");
             return;
         }
-
 
         // Play the sound found
         s.source.Play();

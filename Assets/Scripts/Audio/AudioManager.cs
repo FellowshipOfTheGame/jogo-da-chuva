@@ -14,11 +14,13 @@ public class AudioManager : Audio
     public static AudioManager Instance;
 
     // Awake is called before the Start method
-    void Awake()
+    protected override void Awake()
     {
         if (Instance == null)
             Instance = this;
         else
             GameObject.Destroy(this);
+
+        base.Awake();        
     }
 }
