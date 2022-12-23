@@ -10,30 +10,87 @@ using UnityEngine;
 
 public class Audio : MonoBehaviour
 {
-    public Sound[] sounds;
+    [SerializeField] private AudioMixerGroup _SFX_output;
+    [SerializeField] private AudioMixerGroup _Music_output;
+    [SerializeField] private Sound[] _SFXs;
+    [SerializeField] private Sound[] _musics;
 
     // Awake is called before the Start method
     void Awake()
     {
-        foreach (Sound s in sounds)
+        foreach (Sound s in _SFXs)
         {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
-
-            s.source.outputAudioMixerGroup = s.output;
-
-            s.source.loop = s.loop;
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.spatialBlend = s.spatialBlend;
+            SetSoundSettings(s, _SFX_output);
+        }
+        foreach (Sound s in _musics)
+        {
+            SetSoundSettings(s, _Music_output);
         }
     }
 
-    // OBS: The functions bellow could be one function with a "switch - case"
-    //      
+    private void SetSoundSettings(Sound s, AudioMixerGroup output)
+    {
+        s.source = gameObject.AddComponent<AudioSource>();
+        s.source.outputAudioMixerGroup = output;
+        s.source.clip = s.clip;
+        s.source.loop = s.loop;
+        s.source.volume = s.volume;
+        s.source.pitch = s.pitch;
+        s.source.spatialBlend = s.spatialBlend;
+    }
+
+    public void PlaySFX (string name)
+    {
+        Play(name, _SFXs);
+    }
+
+    public void StopSFX (string name)
+    {
+        Stop(name, _SFXs);
+    }
+
+    public void PauseSFX(string name)
+    {
+        Pause(name, _SFXs);
+    }
+
+    public void UnpauseSFX(string name)
+    {
+        Unpause(name, _SFXs);
+    }
+
+    public void ReturnSFXAudioclip(string name)
+    {
+        ReturnAudioclip(name, _SFXs);
+    }
+
+    public void PlayMusic(string name)
+    {
+        Play(name, _musics);
+    }
+
+    public void StopMusic(string name)
+    {
+        Stop(name, _musics);
+    }
+
+    public void PauseMusic(string name)
+    {
+        Pause(name, _musics);
+    }
+
+    public void UnpauseMusic(string name)
+    {
+        Unpause(name, _musics);
+    }
+
+    public void ReturnMusicAudioclip(string name)
+    {
+        ReturnAudioclip(name, _musics);
+    }
 
     // Play the sound with the 'name' passed by parameter
-    public void Play(string name)
+    private void Play(string name, Sound[] sounds)
     {
         // search in the sound array the sound with de given name
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -51,7 +108,7 @@ public class Audio : MonoBehaviour
     }
 
     // Stop the sound with the 'name' passed by parameter
-    public void Stop(string name)
+    private void Stop(string name, Sound[] sounds)
     {
         // search in the sound array the sound with de given name
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -68,7 +125,7 @@ public class Audio : MonoBehaviour
     }
 
     // Stop the sound with the 'name' passed by parameter
-    public void Pause(string name)
+    public void Pause(string name, Sound[] sounds)
     {
         // search in the sound array the sound with de given name
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -86,7 +143,7 @@ public class Audio : MonoBehaviour
     }
 
     // Stop the sound with the 'name' passed by parameter
-    public void Unpause(string name)
+    private void Unpause(string name, Sound[] sounds)
     {
         // search in the sound array the sound with de given name
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -104,30 +161,10 @@ public class Audio : MonoBehaviour
     }
 
     // Return the audioclip of the given name
-    public AudioClip ReturnAudioclip(string name)
+    private AudioClip ReturnAudioclip(string name, Sound[] sounds)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
 
         return s.clip;
     }
-
-    /*
-    // Can play multiple sounds on one AudioSource
-    public void PlayOneShot(string name, float volumeScale)
-    {
-        // search in the sound array the sound with de given name
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-
-        // Check it the given 'name' exists
-        if (s == null)
-        {
-            Debug.LogWarning("Sound:" + name + " not found to PlayOneShot!");
-            return;
-        }
-
-        s.source.PlayOneShot();
-    }
-
-
-    */
 }

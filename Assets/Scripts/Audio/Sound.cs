@@ -8,9 +8,6 @@ public class Sound
     public string name;
     public AudioClip clip;
 
-    // For sound mixer, changeble by menu or something else
-    public AudioMixerGroup output;
-
     // Limits the range of volume and pitch
     [Range(0f, 1f)]
     public float volume = 0.5f;
