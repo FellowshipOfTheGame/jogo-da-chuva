@@ -7,6 +7,7 @@ public class BoardGen : MonoBehaviour
 {
     public string ImageFilename;
     public Transform ParentForTiles;
+    public int mTotalTilesInCorrectPosition { get; set; }
 
     public bool LoadingFinished { get; set; } = false;
     [Tooltip("Set the regions where the tiles should be scrambled to")]
@@ -329,6 +330,7 @@ public class BoardGen : MonoBehaviour
     {
         CreateJigsawBoard();
         Shuffle();
+        mTotalTilesInCorrectPosition = 0;
     }
 
     public int NumTilesX { get; private set; }

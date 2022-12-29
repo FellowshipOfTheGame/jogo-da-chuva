@@ -55,13 +55,19 @@ public class TileMovement : MonoBehaviour
         return;
         }
         float dist = (transform.position - GetCorrectPosition()).magnitude;
-        Debug.Log("dist");
-        Debug.Log(dist);
+        
         if (dist < 80.0f)
         {
-        transform.position = GetCorrectPosition();
+            transform.position = GetCorrectPosition();
+            GetComponent<BoxCollider2D>().enabled = false;
+            transform.parent.GetComponent<BoardGen>().mTotalTilesInCorrectPosition+=1;
+            if(transform.parent.GetComponent<BoardGen>().mTotalTilesInCorrectPosition == 12)
+            {
+                print("finished");
+            }
+            // OnTileInPlace?.Invoke(this);
         }
     }
 
-
+    
 }
