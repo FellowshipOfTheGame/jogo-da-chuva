@@ -680,6 +680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _puzzle: {fileID: 653643072}
+  _scenario: {fileID: 1786193080}
 --- !u!4 &543341115
 Transform:
   m_ObjectHideFlags: 0
