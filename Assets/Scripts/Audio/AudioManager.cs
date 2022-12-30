@@ -5,7 +5,7 @@ using UnityEngine;
 // How to use:
 // Inside some script of an object you desire to play a sound listed on the AudioManager
 // you can simply type: 
-// ***************** 'FindObjectOfType<AudioManager>().Play("Name of the sound");' ******************
+// ***************** 'AudioManager.Instance.Play("Name of the sound");' ******************
 // passing the name of the sound to play it.
 
 public class AudioManager : Audio

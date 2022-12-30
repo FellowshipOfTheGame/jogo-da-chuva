@@ -16,11 +16,11 @@ public class PlayerMovement : MonoBehaviour
 
     private float _maxSpeed;
 
-    public bool isWalking = false;
-    public bool isOnAirJumping = false;
-    public bool isHitingGround = true;
-    public bool isRunning = false;
-    public bool isCrouching = false;
+    [HideInInspector] public bool isWalking = false;
+    [HideInInspector] public bool isOnAirJumping = false;
+    [HideInInspector] public bool isHitingGround = true;
+    [HideInInspector] public bool isRunning = false;
+    [HideInInspector] public bool isCrouching = false;
 
     private bool _isFlipped = false;
 
@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
         if (direction > 0 && _isFlipped)
             FlipPlayer();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !isOnAirJumping)
         {
             isCrouching = false;
             isHitingGround = false;
