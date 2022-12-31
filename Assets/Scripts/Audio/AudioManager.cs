@@ -1,5 +1,3 @@
-using UnityEngine.Audio;
-using System;
 using UnityEngine;
 
 // How to use:

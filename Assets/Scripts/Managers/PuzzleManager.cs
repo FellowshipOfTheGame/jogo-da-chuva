@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PuzzleManager : MonoBehaviour
 {
@@ -21,6 +20,11 @@ public class PuzzleManager : MonoBehaviour
     {
         foreach (Collider2D col in _scenario.GetComponentsInChildren<Collider2D>())
             col.enabled = activation;
+    }
+
+    public void PuzzleSolved()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     void OnTriggerEnter2D(Collider2D col)

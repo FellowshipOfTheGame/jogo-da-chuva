@@ -7,6 +7,10 @@ public class Wire : MonoBehaviour
     Vector3 startPoint, startPosition;
     Vector2 startWireEndSize;
     public SpriteRenderer wireEnd;
+
+    private static int wiresSolved = 0;
+    private const int TOTAL_NUMBER_OF_WIRES = 4;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,8 +38,10 @@ public class Wire : MonoBehaviour
                 
                 // check color wire
                 if(transform.parent.name.Equals(collider.transform.parent.name))
-                {
-                    // print("collided");
+                {                    
+                    wiresSolved += 1;
+                    if (wiresSolved >= TOTAL_NUMBER_OF_WIRES)
+                        PuzzleManager.Instance.PuzzleSolved();
                     Destroy(this);
                 }
                 return;
