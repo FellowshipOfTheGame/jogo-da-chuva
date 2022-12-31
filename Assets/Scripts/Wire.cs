@@ -39,9 +39,12 @@ public class Wire : MonoBehaviour
                 // check color wire
                 if(transform.parent.name.Equals(collider.transform.parent.name))
                 {                    
+
                     wiresSolved += 1;
+                    // check if the puzzle was solved
                     if (wiresSolved >= TOTAL_NUMBER_OF_WIRES)
                         PuzzleManager.Instance.PuzzleSolved();
+
                     Destroy(this);
                 }
                 return;
