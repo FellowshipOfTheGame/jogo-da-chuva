@@ -31,7 +31,8 @@ public class PuzzleManager : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
+        PlayerMovement.Instance.isPaused = true;
         DeactivateAllDiscuptiveColliders(false);
         _puzzle.SetActive(true);
     }

@@ -63,7 +63,7 @@ public class TileMovement : MonoBehaviour
             transform.parent.GetComponent<BoardGen>().mTotalTilesInCorrectPosition+=1;
             if(transform.parent.GetComponent<BoardGen>().mTotalTilesInCorrectPosition == 12)
             {
-                print("finished");
+                PuzzleManager.Instance.PuzzleSolved();
             }
             // OnTileInPlace?.Invoke(this);
         }

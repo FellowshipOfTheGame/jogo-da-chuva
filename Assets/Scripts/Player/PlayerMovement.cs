@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public static PlayerMovement Instance;
 
+    [HideInInspector] public bool isPaused = false;
+
     [SerializeField] private Animator anim;
 
     private const float MIN_DISTANCE = 0.001f;
@@ -42,47 +44,55 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        float direction = Input.GetAxis("Horizontal");
-
-        playerVelocity.x = direction * _maxSpeed;
-
-        if (Mathf.Abs(direction) > MIN_DISTANCE && !isOnAirJumping && !isCrouching && isHitingGround)
+        if (!isPaused)
         {
-            _maxSpeed = maxWalkSpeed;
-            isWalking = true;
+            float direction = Input.GetAxis("Horizontal");
+
+            playerVelocity.x = direction * _maxSpeed;
+
+            if (Mathf.Abs(direction) > MIN_DISTANCE && !isOnAirJumping && !isCrouching && isHitingGround)
+            {
+                _maxSpeed = maxWalkSpeed;
+                isWalking = true;
+            }
+            else
+                isWalking = false;
+
+            if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKey(KeyCode.LeftShift)) && !isOnAirJumping)
+            {
+                _maxSpeed = maxCrouchSpeed;
+                isCrouching = true;
+            } else if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                isCrouching = false;
+            }
+
+            if (direction < 0 && !_isFlipped)
+                FlipPlayer();
+            if (direction > 0 && _isFlipped)
+                FlipPlayer();
+
+            if (Input.GetKeyDown(KeyCode.Space) && !isOnAirJumping)
+            {
+                isCrouching = false;
+                isHitingGround = false;
+                isOnAirJumping = true;
+                playerVelocity.y = jumpSpeed;
+            }
+            else
+            {
+                playerVelocity.y = GetComponent<Rigidbody2D>().velocity.y;
+            }
+
+            GetComponent<Rigidbody2D>().velocity = playerVelocity;
+
+            UpdateAnimator();
         }
         else
-            isWalking = false;
-
-        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKey(KeyCode.LeftShift)) && !isOnAirJumping)
         {
-            _maxSpeed = maxCrouchSpeed;
-            isCrouching = true;
-        } else if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            isCrouching = false;
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isHitingGround", true);
         }
-
-        if (direction < 0 && !_isFlipped)
-            FlipPlayer();
-        if (direction > 0 && _isFlipped)
-            FlipPlayer();
-
-        if (Input.GetKeyDown(KeyCode.Space) && !isOnAirJumping)
-        {
-            isCrouching = false;
-            isHitingGround = false;
-            isOnAirJumping = true;
-            playerVelocity.y = jumpSpeed;
-        }
-        else
-        {
-            playerVelocity.y = GetComponent<Rigidbody2D>().velocity.y;
-        }
-
-        GetComponent<Rigidbody2D>().velocity = playerVelocity;
-
-        UpdateAnimator();
     }
 
     void UpdateAnimator()
