@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private string gameLevel;
+    //[SerializeField] private string gameLevel;
     [SerializeField] private GameObject menuPanel, optionsPanel;
     // Start is called before the first frame update
     public void StartGame()
     {
-        SceneManager.LoadScene(gameLevel);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void OpenOptions()
