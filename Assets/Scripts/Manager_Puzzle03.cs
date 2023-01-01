@@ -42,7 +42,7 @@ public class Manager_Puzzle03 : MonoBehaviour
 
     public void AnimFineshed()
     {
-        print("fine");
+        PuzzleManager.Instance.PuzzleSolved();
         anim.enabled = false;
     }
     
