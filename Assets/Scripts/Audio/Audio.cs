@@ -163,4 +163,15 @@ public class Audio : MonoBehaviour
 
         return s.clip;
     }
+
+    // Not working, AudioSettings.dspTime is not returning 
+    public void PlayMusicOneShot(string intro, string loop)
+    {
+        AudioSource musicSource = Array.Find(_musics, sound => sound.name == loop).source;
+        AudioClip musicStart = Array.Find(_musics, sound => sound.name == intro).clip;
+
+        musicSource.PlayOneShot(musicStart);
+        Debug.Log(AudioSettings.dspTime);
+        musicSource.PlayScheduled(AudioSettings.dspTime + musicStart.length);
+    }
 }
