@@ -591,7 +591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0409faac27b41fa4aa859ea31e84dc7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _puzzle: {fileID: 0}
+  _puzzle: {fileID: 940000059650816428, guid: 753fc55a77edf224896618844d6f1f84, type: 3}
   _scenario: {fileID: 1786193080}
 --- !u!4 &543341115
 Transform:
@@ -2087,7 +2087,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1836850545
 MonoBehaviour:
   m_ObjectHideFlags: 0
