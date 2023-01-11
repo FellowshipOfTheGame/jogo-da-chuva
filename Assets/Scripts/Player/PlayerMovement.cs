@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -25,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public bool isCrouching = false;
 
     private bool _isFlipped = false;
+    private Rigidbody2D _rb;
 
     Vector3 playerVelocity;
 
@@ -40,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
     {
         playerVelocity = Vector3.zero;
         _maxSpeed = maxWalkSpeed;
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -49,10 +52,9 @@ public class PlayerMovement : MonoBehaviour
             float x_direction = Input.GetAxis("Horizontal");
             float y_direction = Input.GetAxis("Vertical");
 
-            playerVelocity.y = y_direction * _maxSpeed;
-            playerVelocity.x = x_direction * _maxSpeed;
+            playerVelocity = Vector3.Normalize(new Vector3(x_direction, y_direction, 0.0f)) * _maxSpeed;
 
-            if ((Mathf.Abs(x_direction) > MIN_DISTANCE || (Mathf.Abs(y_direction) > MIN_DISTANCE)) && !isOnAirJumping && !isCrouching && isHitingGround)
+            if ((Mathf.Abs(x_direction) > MIN_DISTANCE || (Mathf.Abs(y_direction) > MIN_DISTANCE)) && !isCrouching && isHitingGround)
             {
                 _maxSpeed = maxWalkSpeed;
                 isWalking = true;
@@ -60,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
             else
                 isWalking = false;
 
-            if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKey(KeyCode.LeftShift)) && !isOnAirJumping)
+            if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKey(KeyCode.LeftShift)) )
             {
                 _maxSpeed = maxCrouchSpeed;
                 isCrouching = true;
@@ -73,22 +75,8 @@ public class PlayerMovement : MonoBehaviour
                 FlipPlayer();
             if (x_direction > 0 && _isFlipped)
                 FlipPlayer();
-            /*
-            if (isOnAirJumping)
-            {
-                playerVelocity.y = GetComponent<Rigidbody2D>().velocity.y;
-            }
-            else if (Input.GetKeyDown(KeyCode.Space))
-            {
-                isCrouching = false;
-                isHitingGround = false;
-                isOnAirJumping = true;
-                playerVelocity.y = jumpSpeed;
-            }
-            */
-            Debug.Log(playerVelocity.y);
 
-            GetComponent<Rigidbody2D>().velocity = playerVelocity;
+            _rb.velocity = playerVelocity;
 
             UpdateAnimator();
         }
@@ -102,7 +90,6 @@ public class PlayerMovement : MonoBehaviour
     void UpdateAnimator()
     {
         anim.SetBool("isWalking", isWalking);
-        anim.SetBool("isOnAirJumping", isOnAirJumping);
         anim.SetBool("isHitingGround", isHitingGround);
         anim.SetBool("isCrouching", isCrouching);
     }
