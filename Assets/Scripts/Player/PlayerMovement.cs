@@ -46,11 +46,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isPaused)
         {
-            float direction = Input.GetAxis("Horizontal");
+            float x_direction = Input.GetAxis("Horizontal");
+            float y_direction = Input.GetAxis("Vertical");
 
-            playerVelocity.x = direction * _maxSpeed;
+            playerVelocity.y = y_direction * _maxSpeed;
+            playerVelocity.x = x_direction * _maxSpeed;
 
-            if (Mathf.Abs(direction) > MIN_DISTANCE && !isOnAirJumping && !isCrouching && isHitingGround)
+            if ((Mathf.Abs(x_direction) > MIN_DISTANCE || (Mathf.Abs(y_direction) > MIN_DISTANCE)) && !isOnAirJumping && !isCrouching && isHitingGround)
             {
                 _maxSpeed = maxWalkSpeed;
                 isWalking = true;
@@ -67,22 +69,24 @@ public class PlayerMovement : MonoBehaviour
                 isCrouching = false;
             }
 
-            if (direction < 0 && !_isFlipped)
+            if (x_direction < 0 && !_isFlipped)
                 FlipPlayer();
-            if (direction > 0 && _isFlipped)
+            if (x_direction > 0 && _isFlipped)
                 FlipPlayer();
-
-            if (Input.GetKeyDown(KeyCode.Space) && !isOnAirJumping)
+            /*
+            if (isOnAirJumping)
+            {
+                playerVelocity.y = GetComponent<Rigidbody2D>().velocity.y;
+            }
+            else if (Input.GetKeyDown(KeyCode.Space))
             {
                 isCrouching = false;
                 isHitingGround = false;
                 isOnAirJumping = true;
                 playerVelocity.y = jumpSpeed;
             }
-            else
-            {
-                playerVelocity.y = GetComponent<Rigidbody2D>().velocity.y;
-            }
+            */
+            Debug.Log(playerVelocity.y);
 
             GetComponent<Rigidbody2D>().velocity = playerVelocity;
 
