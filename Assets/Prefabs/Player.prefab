@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6417006841502551068}
   - component: {fileID: 6417006841502551058}
   - component: {fileID: 6417006841502551059}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -85,6 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a0b80371dbdb5546bfb4d8f34cd2b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPaused: 0
   anim: {fileID: 6417006842482205253}
   maxWalkSpeed: 10
   maxCrouchSpeed: 5
@@ -122,7 +123,7 @@ GameObject:
   - component: {fileID: 6417006842482205255}
   - component: {fileID: 6417006842482205253}
   - component: {fileID: 6417006842482205252}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
