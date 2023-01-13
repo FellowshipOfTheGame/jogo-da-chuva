@@ -77,14 +77,13 @@ public class PlayerMovement : MonoBehaviour
                 FlipPlayer();
 
             _rb.velocity = playerVelocity;
-
-            UpdateAnimator();
         }
         else
         {
-            anim.SetBool("isWalking", false);
-            anim.SetBool("isHitingGround", true);
+            _rb.velocity = Vector3.zero;
+            isWalking = false; isHitingGround = true; isCrouching = false;
         }
+        UpdateAnimator();
     }
 
     void UpdateAnimator()

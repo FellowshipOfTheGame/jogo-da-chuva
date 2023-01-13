@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class MusicLoopPlay : MonoBehaviour
 {
+    public static MusicLoopPlay Instance;
     [SerializeField] private AudioSource musicLoopSource;
     [SerializeField] private AudioClip musicIntro;
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(this.gameObject);
+    }
+
     void Start()
     {
         musicLoopSource.PlayOneShot(musicIntro);
