@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Animator anim;
 
-    private const float MIN_DISTANCE = 0.001f;
+    private const float MIN_DISTANCE = 0.95f;
 
     [SerializeField] private float maxWalkSpeed;
     [SerializeField] private float maxCrouchSpeed;
@@ -49,8 +49,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isPaused)
         {
-            float x_direction = Input.GetAxis("Horizontal");
-            float y_direction = Input.GetAxis("Vertical");
+            float x_direction = Input.GetAxisRaw("Horizontal");
+            float y_direction = Input.GetAxisRaw("Vertical");
 
             playerVelocity = Vector3.Normalize(new Vector3(x_direction, y_direction, 0.0f)) * _maxSpeed;
 
