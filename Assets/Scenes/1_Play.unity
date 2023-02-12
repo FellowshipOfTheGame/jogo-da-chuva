@@ -2869,6 +2869,10 @@ PrefabInstance:
       value: Sprinkler (1)
       objectReference: {fileID: 0}
     - target: {fileID: 715721702994782986, guid: 70aebb6377e2ee84a9b118b4ff10d61c, type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 715721702994782986, guid: 70aebb6377e2ee84a9b118b4ff10d61c, type: 3}
       propertyPath: CollisionModule.radiusScale
       value: 0.1
       objectReference: {fileID: 0}
@@ -3349,8 +3353,32 @@ PrefabInstance:
       value: Sprinkler
       objectReference: {fileID: 0}
     - target: {fileID: 715721702994782986, guid: 70aebb6377e2ee84a9b118b4ff10d61c, type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 715721702994782986, guid: 70aebb6377e2ee84a9b118b4ff10d61c, type: 3}
+      propertyPath: ShapeModule.angle
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 715721702994782986, guid: 70aebb6377e2ee84a9b118b4ff10d61c, type: 3}
       propertyPath: CollisionModule.radiusScale
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 715721702994782986, guid: 70aebb6377e2ee84a9b118b4ff10d61c, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 715721702994782986, guid: 70aebb6377e2ee84a9b118b4ff10d61c, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 715721702994782986, guid: 70aebb6377e2ee84a9b118b4ff10d61c, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 715721702994782986, guid: 70aebb6377e2ee84a9b118b4ff10d61c, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 715721702994782986, guid: 70aebb6377e2ee84a9b118b4ff10d61c, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
@@ -3381,12 +3409,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 715721702994782997, guid: 70aebb6377e2ee84a9b118b4ff10d61c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 715721702994782997, guid: 70aebb6377e2ee84a9b118b4ff10d61c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.48
       objectReference: {fileID: 0}
     - target: {fileID: 715721702994782997, guid: 70aebb6377e2ee84a9b118b4ff10d61c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.08
+      value: 2.51
       objectReference: {fileID: 0}
     - target: {fileID: 715721702994782997, guid: 70aebb6377e2ee84a9b118b4ff10d61c, type: 3}
       propertyPath: m_LocalPosition.z
