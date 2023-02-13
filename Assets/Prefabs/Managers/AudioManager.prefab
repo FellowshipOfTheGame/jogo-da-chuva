@@ -83,3 +83,17 @@ MonoBehaviour:
     spatialBlend: 0
     loop: 1
     source: {fileID: 0}
+  - name: LetItRainIntro
+    clip: {fileID: 8300000, guid: 7b8a0976336f58b479ebc387b2060c8a, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: LetItRainLoop
+    clip: {fileID: 8300000, guid: 531f202b01aabdc419e57aaef5000f2d, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 1
+    source: {fileID: 0}

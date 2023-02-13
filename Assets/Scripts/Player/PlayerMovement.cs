@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     public static PlayerMovement Instance;
 
+    [HideInInspector] public bool isPaused = false;
+
     [SerializeField] private Animator anim;
 
-    private const float MIN_DISTANCE = 0.001f;
+    private const float MIN_DISTANCE = 0.95f;
 
     [SerializeField] private float maxWalkSpeed;
     [SerializeField] private float maxCrouchSpeed;
@@ -16,13 +19,14 @@ public class PlayerMovement : MonoBehaviour
 
     private float _maxSpeed;
 
-    public bool isWalking = false;
-    public bool isOnAirJumping = false;
-    public bool isHitingGround = true;
-    public bool isRunning = false;
-    public bool isCrouching = false;
+    [HideInInspector] public bool isWalking = false;
+    [HideInInspector] public bool isOnAirJumping = false;
+    [HideInInspector] public bool isHitingGround = true;
+    [HideInInspector] public bool isRunning = false;
+    [HideInInspector] public bool isCrouching = false;
 
     private bool _isFlipped = false;
+    private Rigidbody2D _rb;
 
     Vector3 playerVelocity;
 
@@ -38,57 +42,53 @@ public class PlayerMovement : MonoBehaviour
     {
         playerVelocity = Vector3.zero;
         _maxSpeed = maxWalkSpeed;
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        float direction = Input.GetAxis("Horizontal");
-
-        playerVelocity.x = direction * _maxSpeed;
-
-        if (Mathf.Abs(direction) > MIN_DISTANCE && !isOnAirJumping && !isCrouching && isHitingGround)
+        if (!isPaused)
         {
-            _maxSpeed = maxWalkSpeed;
-            isWalking = true;
+            float x_direction = Input.GetAxisRaw("Horizontal");
+            float y_direction = Input.GetAxisRaw("Vertical");
+
+            playerVelocity = Vector3.Normalize(new Vector3(x_direction, y_direction, 0.0f)) * _maxSpeed;
+
+            if ((Mathf.Abs(x_direction) > MIN_DISTANCE || (Mathf.Abs(y_direction) > MIN_DISTANCE)) && !isCrouching && isHitingGround)
+            {
+                _maxSpeed = maxWalkSpeed;
+                isWalking = true;
+            }
+            else
+                isWalking = false;
+
+            if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKey(KeyCode.LeftShift)) )
+            {
+                _maxSpeed = maxCrouchSpeed;
+                isCrouching = true;
+            } else if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                isCrouching = false;
+            }
+
+            if (x_direction < 0 && !_isFlipped)
+                FlipPlayer();
+            if (x_direction > 0 && _isFlipped)
+                FlipPlayer();
+
+            _rb.velocity = playerVelocity;
         }
         else
-            isWalking = false;
-
-        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKey(KeyCode.LeftShift)) && !isOnAirJumping)
         {
-            _maxSpeed = maxCrouchSpeed;
-            isCrouching = true;
-        } else if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            isCrouching = false;
+            _rb.velocity = Vector3.zero;
+            isWalking = false; isHitingGround = true; isCrouching = false;
         }
-
-        if (direction < 0 && !_isFlipped)
-            FlipPlayer();
-        if (direction > 0 && _isFlipped)
-            FlipPlayer();
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            isCrouching = false;
-            isHitingGround = false;
-            isOnAirJumping = true;
-            playerVelocity.y = jumpSpeed;
-        }
-        else
-        {
-            playerVelocity.y = GetComponent<Rigidbody2D>().velocity.y;
-        }
-
-        GetComponent<Rigidbody2D>().velocity = playerVelocity;
-
         UpdateAnimator();
     }
 
     void UpdateAnimator()
     {
         anim.SetBool("isWalking", isWalking);
-        anim.SetBool("isOnAirJumping", isOnAirJumping);
         anim.SetBool("isHitingGround", isHitingGround);
         anim.SetBool("isCrouching", isCrouching);
     }
