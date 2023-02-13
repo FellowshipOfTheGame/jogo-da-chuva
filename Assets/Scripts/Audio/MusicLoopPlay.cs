@@ -21,4 +21,15 @@ public class MusicLoopPlay : MonoBehaviour
         musicLoopSource.PlayOneShot(musicIntro);
         musicLoopSource.PlayScheduled(AudioSettings.dspTime + musicIntro.length);
     }
+
+    public void StopTheMusic()
+    {
+        AudioListener.pause = true;
+    }
+
+    public void UnstopTheMusic()
+    {
+        //musicLoopSource.UnPause();
+        AudioListener.pause = false;
+    }
 }

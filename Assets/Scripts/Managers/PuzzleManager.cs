@@ -5,8 +5,10 @@ public class PuzzleManager : MonoBehaviour
 {
     public static PuzzleManager Instance;
 
+    [SerializeField] private AudioSource _puzzleMusic;
     [SerializeField] private GameObject _puzzle;
     [SerializeField] private GameObject _scenario;  // Gameobject containing all scenario obj and its colliders
+
 
     void Awake()
     {
@@ -26,15 +28,25 @@ public class PuzzleManager : MonoBehaviour
     // Pass to the next scene (called when a puzzle is solved)
     public void PuzzleSolved()
     {
+        AudioListener.pause = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        //Time.timeScale = 0;
-        print("coll");
-        PlayerMovement.Instance.isPaused = true;
-        DeactivateAllDiscuptiveColliders(false);
-        _puzzle.SetActive(true);
+        if (col.gameObject.tag == "Player")
+        {
+            if (_puzzleMusic != null)
+            {
+                _puzzleMusic.ignoreListenerPause = true;
+                _puzzleMusic.Play();
+            }
+
+            AudioListener.pause = true;
+            PlayerMovement.Instance.isPaused = true;
+            DeactivateAllDiscuptiveColliders(false);
+            _puzzle.SetActive(true);
+
+        }
     }
 }
