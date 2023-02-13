@@ -1817,6 +1817,10 @@ PrefabInstance:
       propertyPath: _scenario
       value: 
       objectReference: {fileID: 1922976130}
+    - target: {fileID: 1147209496489823238, guid: 035b0d779011b1c47a41bae6e4666181, type: 3}
+      propertyPath: _puzzleMusic
+      value: 
+      objectReference: {fileID: 1276743027}
     - target: {fileID: 1610538434857984531, guid: 035b0d779011b1c47a41bae6e4666181, type: 3}
       propertyPath: m_RootOrder
       value: 6

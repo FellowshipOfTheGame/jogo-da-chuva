@@ -879,7 +879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0409faac27b41fa4aa859ea31e84dc7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _puzzleMusic: {fileID: 0}
+  _puzzleMusic: {fileID: 543341116}
   _puzzle: {fileID: 860609312}
   _scenario: {fileID: 1786193080}
 --- !u!4 &543341115
