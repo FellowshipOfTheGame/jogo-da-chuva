@@ -1296,6 +1296,14 @@ PrefabInstance:
       value: Sprinkler (1)
       objectReference: {fileID: 0}
     - target: {fileID: 715721702994782986, guid: 70aebb6377e2ee84a9b118b4ff10d61c, type: 3}
+      propertyPath: ShapeModule.angle
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 715721702994782986, guid: 70aebb6377e2ee84a9b118b4ff10d61c, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 715721702994782986, guid: 70aebb6377e2ee84a9b118b4ff10d61c, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
       value: 8.2
       objectReference: {fileID: 0}
@@ -1906,7 +1914,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1998,6 +2006,14 @@ PrefabInstance:
     - target: {fileID: 715721702994782984, guid: 70aebb6377e2ee84a9b118b4ff10d61c, type: 3}
       propertyPath: m_Name
       value: Sprinkler
+      objectReference: {fileID: 0}
+    - target: {fileID: 715721702994782986, guid: 70aebb6377e2ee84a9b118b4ff10d61c, type: 3}
+      propertyPath: ShapeModule.angle
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 715721702994782986, guid: 70aebb6377e2ee84a9b118b4ff10d61c, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 715721702994782986, guid: 70aebb6377e2ee84a9b118b4ff10d61c, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
