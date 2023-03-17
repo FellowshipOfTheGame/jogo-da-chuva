@@ -9,7 +9,9 @@ public class ExitScene : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(PassNextScene(_exitAnimation.length + 5.0f));
+        if (MusicLoopPlay.Instance)
+            Destroy(MusicLoopPlay.Instance.gameObject);
+        StartCoroutine(PassNextScene(_exitAnimation.length + 4.0f));
     }
 
     IEnumerator PassNextScene(float waitDuration)
