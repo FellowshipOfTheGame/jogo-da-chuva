@@ -8,9 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/0_main.unity
     guid: 5a85f0dcc37b32b4c9303ea586f7287f
-  - enabled: 0
-    path: Assets/Scenes/Puzzles/Puzzle_01.unity
-    guid: fdb3b37371c64614693132e808fdceab
   - enabled: 1
     path: Assets/Scenes/1_Play.unity
     guid: 41a1d709d0606e5429f281fc68d649d0
@@ -23,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/4_Play.unity
     guid: ca28556b7d8e50a47b336721bde98694
+  - enabled: 1
+    path: Assets/Scenes/5_Exit.unity
+    guid: 93cd80eacf34f1f41803541566fd39c9
+  - enabled: 1
+    path: Assets/Scenes/6_Credits.unity
+    guid: 800e45ab569d0db4b94cbadb5f2fe7a3
   m_configObjects: {}
