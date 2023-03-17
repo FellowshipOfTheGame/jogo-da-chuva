@@ -4458,11 +4458,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6417006841502551058, guid: eb02d5b8a8621b34fb1ae02a15329b82, type: 3}
       propertyPath: maxWalkSpeed
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6417006841502551058, guid: eb02d5b8a8621b34fb1ae02a15329b82, type: 3}
       propertyPath: maxCrouchSpeed
-      value: 3.5
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 6417006841502551068, guid: eb02d5b8a8621b34fb1ae02a15329b82, type: 3}
       propertyPath: m_GravityScale

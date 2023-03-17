@@ -778,6 +778,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6417006841502551058, guid: eb02d5b8a8621b34fb1ae02a15329b82, type: 3}
+      propertyPath: maxWalkSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6417006841502551058, guid: eb02d5b8a8621b34fb1ae02a15329b82, type: 3}
+      propertyPath: maxCrouchSpeed
+      value: 4.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6417006841502551070, guid: eb02d5b8a8621b34fb1ae02a15329b82, type: 3}
       propertyPath: m_Name
       value: Player
