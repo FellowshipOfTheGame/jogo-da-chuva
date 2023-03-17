@@ -53,8 +53,7 @@ public class PlayerMaze : MonoBehaviour
     {
         if (alive)
         {
-            // audioS.clip = deathSound;
-            // audioS.Play();
+            AudioListener.pause = false;
             alive = false;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
