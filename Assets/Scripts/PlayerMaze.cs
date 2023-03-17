@@ -44,9 +44,7 @@ public class PlayerMaze : MonoBehaviour
         
         if (collision.gameObject.tag == "exit")
         {
-            youWin.text = "YOU WIN!!!";
-            Destroy(this);
-            
+            PuzzleManager.Instance.PuzzleSolved();            
         }
         
     }
